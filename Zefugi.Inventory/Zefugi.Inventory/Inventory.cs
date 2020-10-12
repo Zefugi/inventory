@@ -42,7 +42,7 @@ namespace Zefugi.Inventory
         public void Store(T Item)
         {
             if (!HasRoom(Item))
-                throw new Exception("Tried to add an item that did not fit in inventory.");
+                throw new InventoryException("Tried to add an item that did not fit in inventory.");
             
             _items.Add(Item);
         }

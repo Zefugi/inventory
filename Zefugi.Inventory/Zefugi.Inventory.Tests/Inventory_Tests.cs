@@ -75,7 +75,7 @@ namespace Zefugi.Inventory.Tests
             };
 
             try { inv.Store(item); }
-            catch { }
+            catch (InventoryException) { }
 
             Assert.AreEqual(expectedIsAvailable, inv.IsAvailable(item));
         }
@@ -92,7 +92,7 @@ namespace Zefugi.Inventory.Tests
                 SlotsRequired = itemRequiredSlots,
             };
 
-            Assert.Throws<Exception>(() => { inv.Store(item); });
+            Assert.Throws<InventoryException>(() => { inv.Store(item); });
         }
 
         [Test] // TODO
