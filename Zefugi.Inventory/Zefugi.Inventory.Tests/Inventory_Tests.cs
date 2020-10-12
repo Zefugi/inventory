@@ -11,6 +11,9 @@ namespace Zefugi.Inventory.Tests
     public class Inventory_Tests
     {
         [Test]
+        public void Ctor_SetsNumberOfSlots() { }
+
+        [Test]
         public void SlotsTotal_GetsNumberOfSlotsInTotal() { }
 
         [Test]
