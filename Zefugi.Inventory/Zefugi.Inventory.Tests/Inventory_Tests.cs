@@ -63,8 +63,22 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO
         public void HasRoom_ReturnsStackAvailabilityForSpecifiedItem() { }
 
+        [Test]
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItem(bool storeItemBeforeTest, bool expectedAvailable)
+        {
+            var inv = new Inventory<InventoryItemBase>(4);
+            var item = new InventoryItemBase() { SlotsRequired = 1 };
+
+            if(storeItemBeforeTest)
+                inv.Store(item);
+
+            Assert.AreEqual(expectedAvailable, inv.IsAvailable(item));
+        }
+
         [Test] // TODO
-        public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItem() { }
+        public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItemStackSize() { }
 
         [Test]
         [TestCase(4, 1, 3)]
