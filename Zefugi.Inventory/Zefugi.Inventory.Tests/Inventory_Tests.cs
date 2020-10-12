@@ -20,30 +20,54 @@ namespace Zefugi.Inventory.Tests
         }
 
         [Test]
-        public void SlotsTotal_GetsNumberOfSlotsInTotal() { }
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(4)]
+        public void SlotsTotal_GetsNumberOfSlotsInTotal(int numberOfSlots)
+        {
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
 
-        [Test]
+            Assert.AreEqual(numberOfSlots, inv.SlotsTotal);
+        }
+
+        [Test] // TODO
         public void SlotsTotal_SetThrowsException_IfSlotsInUse() { }
 
         [Test]
-        public void HasRoom_ReturnsSlotAvailabilityForSpecifiedItem() { }
+        [TestCase(1, true)]
+        [TestCase(5, false)]
+        public void HasRoom_ReturnsSlotAvailabilityForSpecifiedItem(int itemSlotsRequired, bool expectedHasRoom)
+        {
+            int numberOfSlots = 4;
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
 
-        [Test]
+            bool hasRoom = inv.HasRoom(new InventoryItemBase()
+            {
+                SlotsRequired = itemSlotsRequired,
+            });
+
+            Assert.AreEqual(expectedHasRoom, hasRoom);
+        }
+
+        [Test] // TODO
+        public void HasRoom_ReturnsStackAvailabilityForSpecifiedItem(int itemStackSize, bool expectedHasRoom) { }
+
+        [Test] // TODO
         public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItem() { }
 
-        [Test]
+        [Test] // TODO
         public void GetFreeSlots_ReturnsTotalSlotsMinusSlotsUsed() { }
 
-        [Test]
+        [Test] // TODO
         public void GetUsedSlots_ReturnsSlotsUsed() { }
 
-        [Test]
+        [Test] // TODO
         public void Store_MakesItemAvailable_IfHasRoom() { }
 
-        [Test]
+        [Test] // TODO
         public void Drain_RemovesAndReturnsItem_IfAvailable() { }
 
-        [Test]
+        [Test] // TODO
         public void AutoStack_StacksItemsOfSameTypeInMaxStackSizes() { }
     }
 }

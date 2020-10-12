@@ -8,5 +8,7 @@ namespace Zefugi.Inventory
 {
     public class InventoryItemBase : IInventoryItem
     {
+        public int StackSize { get; set; }
+        public int SlotsRequired { get; set; }
     }
 }
