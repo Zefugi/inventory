@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,8 +142,42 @@ namespace Zefugi.Inventory.Tests
             Assert.Throws<InventoryException>(() => { inv.Store(item); });
         }
 
-        [Test] // TODO
-        public void Drain_RemovesAndReturnsItem_IfAvailable() { }
+        [Test]
+        [TestCase(2, 2, false)]
+        [TestCase(2, 3, true)]
+        public void Drain_RemovesAndReturnsItem_IfAvailable(int itemsToStore, int itemsToDrain, bool expectException)
+        {
+            int numberOfSlots = 4;
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+            var item = new InventoryItemBase()
+            {
+                ID = 42,
+                StackSize = 1,
+                SlotsRequired = 1,
+            };
+
+            for(int i = 0; i < itemsToStore; i++)
+                inv.Store(item);
+
+            for(int i = 0; i < itemsToDrain; i++)
+            {
+                InventoryItemBase drainedItem = null;
+
+                if (i >= itemsToStore && expectException)
+                    Assert.Throws<InventoryException>(() => { drainedItem = inv.Drain(item); });
+                else
+                    drainedItem = inv.Drain(item);
+
+                if (i < itemsToStore)
+                    Assert.IsNotNull(drainedItem);
+                else
+                    Assert.IsNull(drainedItem);
+            }
+
+        }
+
+        [Test]
+        public void Drain_RemovesAndReturnsItem_IfStacksAvailable() { }
 
         [Test] // TODO
         public void AutoStack_StacksItemsOfSameTypeInMaxStackSizes() { }

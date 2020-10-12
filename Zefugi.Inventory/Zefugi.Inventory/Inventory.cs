@@ -44,12 +44,31 @@ namespace Zefugi.Inventory
             return false;
         }
 
-        public void Store(T Item)
+        public void Store(T item)
         {
-            if (!HasRoom(Item))
+            if (!HasRoom(item))
                 throw new InventoryException("Tried to add an item that did not fit in inventory.");
             
-            _items.Add(Item);
+            _items.Add(item);
+        }
+
+        public T Drain(T item)
+        {
+            if (!IsAvailable(item))
+                throw new InventoryException("Tried to drain an item that was not there.");
+
+            T retrievedItem = null;
+            foreach(var entry in _items)
+            {
+                if(entry.ID == item.ID)
+                {
+                    retrievedItem = entry;
+                    break;
+                }
+            }
+
+            _items.Remove(retrievedItem);
+            return retrievedItem;
         }
 
         public int UsedSlots
