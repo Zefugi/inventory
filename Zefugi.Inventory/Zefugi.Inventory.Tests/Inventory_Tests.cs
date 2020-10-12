@@ -30,8 +30,18 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(numberOfSlots, inv.SlotsTotal);
         }
 
-        [Test] // TODO
-        public void SlotsTotal_SetThrowsException_IfSlotsInUse() { }
+        [Test]
+        public void SlotsTotal_SetThrowsException_IfSlotsInUse()
+        {
+            int numberOfSlots = 4;
+            int slotsPerItem = 2;
+            int newNumberOfSlots = 1;
+            
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+            inv.Store(new InventoryItemBase() { SlotsRequired = slotsPerItem });
+
+            Assert.Throws<InventoryException>(() => { inv.SlotsTotal = newNumberOfSlots; });
+        }
 
         [Test]
         [TestCase(1, 1, true)]

@@ -20,6 +20,17 @@ namespace Zefugi.Inventory
         public int SlotsTotal
         {
             get => _numberOfSlots;
+            set
+            {
+                if (value < 1)
+                    throw new ArgumentOutOfRangeException("SlotsTotal");
+
+                int shrinkage = SlotsTotal - value;
+                if (shrinkage > FreeSlots)
+                    throw new InventoryException("Unable to shrink inventory as there are not enough free slots.");
+
+                _numberOfSlots = value;
+            }
         }
 
         public bool HasRoom(T item) => item.SlotsRequired <= FreeSlots;
