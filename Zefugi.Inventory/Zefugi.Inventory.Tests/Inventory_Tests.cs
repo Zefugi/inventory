@@ -11,7 +11,13 @@ namespace Zefugi.Inventory.Tests
     public class Inventory_Tests
     {
         [Test]
-        public void Ctor_SetsNumberOfSlots() { }
+        public void Ctor_SetsNumberOfSlots()
+        {
+            int numberOfSlots = 4;
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+
+            Assert.AreEqual(numberOfSlots, inv.SlotsTotal);
+        }
 
         [Test]
         public void SlotsTotal_GetsNumberOfSlotsInTotal() { }
