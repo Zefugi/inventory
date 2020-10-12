@@ -57,5 +57,7 @@ namespace Zefugi.Inventory
                 return count;
             }
         }
+
+        public int FreeSlots => _numberOfSlots - UsedSlots;
     }
 }
