@@ -46,5 +46,16 @@ namespace Zefugi.Inventory
             
             _items.Add(Item);
         }
+
+        public int UsedSlots
+        {
+            get
+            {
+                int count = 0;
+                foreach (var entry in _items)
+                    count += entry.SlotsRequired;
+                return count;
+            }
+        }
     }
 }

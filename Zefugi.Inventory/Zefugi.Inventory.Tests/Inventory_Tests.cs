@@ -56,10 +56,20 @@ namespace Zefugi.Inventory.Tests
         public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItem() { }
 
         [Test] // TODO
-        public void GetFreeSlots_ReturnsTotalSlotsMinusSlotsUsed() { }
+        public void FreeSlots_ReturnsTotalSlotsMinusSlotsUsed() { }
 
-        [Test] // TODO
-        public void GetUsedSlots_ReturnsSlotsUsed() { }
+        [Test]
+        [TestCase(4, 1)]
+        [TestCase(4, 4)]
+        public void UsedSlots_ReturnsSlotsUsed(int numberOfSlots, int itemRequiredSlots)
+        {
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+            var item = new InventoryItemBase() { SlotsRequired = itemRequiredSlots };
+
+            inv.Store(item);
+
+            Assert.AreEqual(itemRequiredSlots, inv.UsedSlots);
+        }
 
         [Test]
         [TestCase(4, 1, 2, true)]
