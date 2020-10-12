@@ -50,7 +50,7 @@ namespace Zefugi.Inventory.Tests
         }
 
         [Test] // TODO
-        public void HasRoom_ReturnsStackAvailabilityForSpecifiedItem(int itemStackSize, bool expectedHasRoom) { }
+        public void HasRoom_ReturnsStackAvailabilityForSpecifiedItem() { }
 
         [Test] // TODO
         public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItem() { }
@@ -61,8 +61,39 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO
         public void GetUsedSlots_ReturnsSlotsUsed() { }
 
-        [Test] // TODO
-        public void Store_MakesItemAvailable_IfHasRoom() { }
+        [Test]
+        [TestCase(4, 1, 2, true)]
+        [TestCase(4, 1, 6, false)]
+        public void Store_MakesItemAvailable_IfHasRoom(int numberOfSlots, int itemStackSize, int itemRequiredSlots, bool expectedIsAvailable)
+        {
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+            var item = new InventoryItemBase()
+            {
+                ID = 42,
+                StackSize = itemStackSize,
+                SlotsRequired = itemRequiredSlots,
+            };
+
+            try { inv.Store(item); }
+            catch { }
+
+            Assert.AreEqual(expectedIsAvailable, inv.IsAvailable(item));
+        }
+
+        [Test]
+        [TestCase(4, 1, 6)]
+        public void Store_ThrowsException_IfNotHasRoom(int numberOfSlots, int itemStackSize, int itemRequiredSlots)
+        {
+            var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+            var item = new InventoryItemBase()
+            {
+                ID = 42,
+                StackSize = itemStackSize,
+                SlotsRequired = itemRequiredSlots,
+            };
+
+            Assert.Throws<Exception>(() => { inv.Store(item); });
+        }
 
         [Test] // TODO
         public void Drain_RemovesAndReturnsItem_IfAvailable() { }

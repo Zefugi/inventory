@@ -29,5 +29,22 @@ namespace Zefugi.Inventory
 
             return true;
         }
+
+        public bool IsAvailable(T item)
+        {
+            foreach (T entry in _items)
+                if (item.ID == entry.ID)
+                    return true;
+
+            return false;
+        }
+
+        public void Store(T Item)
+        {
+            if (!HasRoom(Item))
+                throw new Exception("Tried to add an item that did not fit in inventory.");
+            
+            _items.Add(Item);
+        }
     }
 }
