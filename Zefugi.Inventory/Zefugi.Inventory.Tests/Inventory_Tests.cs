@@ -62,7 +62,7 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(expectedHasRoom, hasRoom);
         }
 
-        [Test] // TODO
+        [Test] // TODO HasRoom_ReturnsStackAvailabilityForSpecifiedItem
         public void HasRoom_ReturnsStackAvailabilityForSpecifiedItem() { }
 
         [Test]
@@ -79,7 +79,7 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(expectedAvailable, inv.IsAvailable(item));
         }
 
-        [Test] // TODO
+        [Test] // TODO IsAvailable_ReturnsItemAvailabilityForSpecifiedItemStackSize
         public void IsAvailable_ReturnsItemAvailabilityForSpecifiedItemStackSize() { }
 
         [Test]
@@ -176,10 +176,10 @@ namespace Zefugi.Inventory.Tests
 
         }
 
-        [Test]
+        [Test] // TODO Drain_RemovesAndReturnsItem_IfStacksAvailable
         public void Drain_RemovesAndReturnsItem_IfStacksAvailable() { }
 
-        [Test] // TODO
+        [Test] // TODO AutoStack_StacksItemsOfSameTypeInMaxStackSizes
         public void AutoStack_StacksItemsOfSameTypeInMaxStackSizes() { }
     }
 }
