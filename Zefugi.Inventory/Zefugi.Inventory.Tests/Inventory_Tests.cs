@@ -34,16 +34,17 @@ namespace Zefugi.Inventory.Tests
         public void SlotsTotal_SetThrowsException_IfSlotsInUse() { }
 
         [Test]
-        [TestCase(1, true)]
-        [TestCase(5, false)]
-        public void HasRoom_ReturnsSlotAvailabilityForSpecifiedItem(int itemSlotsRequired, bool expectedHasRoom)
+        [TestCase(1, 1, true)]
+        [TestCase(3, 2, false)]
+        public void HasRoom_ReturnsSlotAvailabilityForSpecifiedItem(int firstItemSlotsRequired, int secondItemSlotsRequired, bool expectedHasRoom)
         {
             int numberOfSlots = 4;
             var inv = new Inventory<InventoryItemBase>(numberOfSlots);
+            inv.Store(new InventoryItemBase() { SlotsRequired = firstItemSlotsRequired });
 
             bool hasRoom = inv.HasRoom(new InventoryItemBase()
             {
-                SlotsRequired = itemSlotsRequired,
+                SlotsRequired = secondItemSlotsRequired,
             });
 
             Assert.AreEqual(expectedHasRoom, hasRoom);

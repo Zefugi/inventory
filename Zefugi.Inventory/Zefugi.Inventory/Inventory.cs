@@ -22,13 +22,7 @@ namespace Zefugi.Inventory
             get => _numberOfSlots;
         }
 
-        public bool HasRoom(T item)
-        {
-            if (_items.Count + item.SlotsRequired > _numberOfSlots)
-                return false;
-
-            return true;
-        }
+        public bool HasRoom(T item) => item.SlotsRequired <= FreeSlots;
 
         public bool IsAvailable(T item)
         {
