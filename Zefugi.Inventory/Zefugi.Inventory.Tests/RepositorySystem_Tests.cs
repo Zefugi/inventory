@@ -29,8 +29,22 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(itemB, repo[itemB.ID]);
         }
 
-        [Test] // TODO Add_OverwritesItem_IfIdExists
-        public void Add_OverwritesItem_IfIdExists() { }
+        [Test]
+        public void Add_OverwritesItem_IfIdExists()
+        {
+            var sharedID = 1;
+            var repo = new RepositorySystem();
+
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = sharedID;
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = sharedID;
+
+            repo.Add(itemA);
+            repo.Add(itemB);
+
+            Assert.AreEqual(itemB, repo[sharedID]);
+        }
 
         [Test] // TODO Clear_RemovesAllItems
         public void Clear_RemovesAllItems() { }
