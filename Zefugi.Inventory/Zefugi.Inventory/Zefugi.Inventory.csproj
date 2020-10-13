@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IItemInfo.cs" />
-    <Compile Include="IRepositorySystem.cs" />
     <Compile Include="RepositorySystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
