@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace Zefugi.Inventory
 {
-    public class RepositorySystem : IRepositorySystem
+    public class RepositorySystem
     {
         private Dictionary<int, IItemInfo> _items = new Dictionary<int, IItemInfo>();
 
-        public IItemInfo this[int id] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IItemInfo this[int id]
+        {
+            get => _items[id];
+        }
 
         public int Count => throw new NotImplementedException();
 
@@ -22,7 +25,7 @@ namespace Zefugi.Inventory
 
         public void Add(IItemInfo item)
         {
-            throw new NotImplementedException();
+            _items[item.ID] = item;
         }
 
         public void AddRange(IEnumerable<IItemInfo> list)

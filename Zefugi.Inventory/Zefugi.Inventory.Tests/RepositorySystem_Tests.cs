@@ -12,8 +12,22 @@ namespace Zefugi.Inventory.Tests
     [TestFixture]
     public class RepositorySystem_Tests
     {
-        [Test] // TODO Add_MakesItemInfoAvailable
-        public void Add_MakesItemInfoAvailable() { }
+        [Test]
+        public void Add_MakesItemInfoAvailable()
+        {
+            var repo = new RepositorySystem();
+
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 1;
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = 2;
+
+            repo.Add(itemA);
+            repo.Add(itemB);
+
+            Assert.AreEqual(itemA, repo[itemA.ID]);
+            Assert.AreEqual(itemB, repo[itemB.ID]);
+        }
 
         [Test] // TODO Add_OverwritesItem_IfIdExists
         public void Add_OverwritesItem_IfIdExists() { }
