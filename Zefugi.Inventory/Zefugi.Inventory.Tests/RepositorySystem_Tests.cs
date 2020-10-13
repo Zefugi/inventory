@@ -103,7 +103,20 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(0, repo.Count);
         }
 
-        [Test] // TODO Indexer_ReturnsItem_IfAvailable_Else_ReturnsNull
-        public void Indexer_ReturnsItem_IfAvailable_Else_ReturnsNull() { }
+        [Test]
+        public void Indexer_ReturnsItem_IfAvailable_Else_ReturnsNull()
+        {
+            var actualID = 1;
+            var fakeID = 2;
+            var repo = new RepositorySystem();
+
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = actualID;
+
+            repo.Add(itemA);
+
+            Assert.AreEqual(itemA, repo[actualID]);
+            Assert.IsNull(repo[fakeID]);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Zefugi.Inventory
 
         public IItemInfo this[int id]
         {
-            get => _items[id];
+            get => _items.ContainsKey(id) ? _items[id] : null;
         }
 
         public int Count => _items.Count;
