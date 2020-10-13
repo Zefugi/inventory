@@ -85,8 +85,23 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(0, repo.Count);
         }
 
-        [Test] // TODO Count_ReturnsNumberOfItems
-        public void Count_ReturnsNumberOfItems() { }
+        [Test]
+        public void Count_ReturnsNumberOfItems()
+        {
+            var repo = new RepositorySystem();
+
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 1;
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = 2;
+
+            repo.Add(itemA);
+            Assert.AreEqual(1, repo.Count);
+            repo.Add(itemB);
+            Assert.AreEqual(2, repo.Count);
+            repo.Clear();
+            Assert.AreEqual(0, repo.Count);
+        }
 
         [Test] // TODO Indexer_ReturnsItem_IfAvailable_Else_ReturnsNull
         public void Indexer_ReturnsItem_IfAvailable_Else_ReturnsNull() { }
