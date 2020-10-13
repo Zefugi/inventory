@@ -30,7 +30,8 @@ namespace Zefugi.Inventory
 
         public void AddRange(IEnumerable<IItemInfo> list)
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+                Add(item);
         }
     }
 }
