@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IInventoryItem.cs" />
-    <Compile Include="Inventory.cs" />
-    <Compile Include="InventoryException.cs" />
-    <Compile Include="InventoryItemBase.cs" />
+    <Compile Include="IItemInfo.cs" />
+    <Compile Include="IRepositorySystem.cs" />
+    <Compile Include="RepositorySystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

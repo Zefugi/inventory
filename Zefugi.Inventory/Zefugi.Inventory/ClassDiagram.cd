@@ -1,41 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Zefugi.Inventory.Inventory">
-    <Position X="2.5" Y="3.5" Width="1.5" />
+  <Class Name="Zefugi.Inventory.RepositorySystem">
+    <Position X="2.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAQAAAAAAAAAAACAAABAAAAAAAAAAAgAAAAA=</HashCode>
-      <FileName>Inventory.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAACAAAAAQAABAAAAAAAAAAAABEAAA=</HashCode>
+      <FileName>RepositorySystem.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="_items" />
-    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.235" />
   </Class>
-  <Class Name="Zefugi.Inventory.InventoryEntry">
-    <Position X="4.75" Y="5.5" Width="1.5" />
+  <Interface Name="Zefugi.Inventory.IRepositorySystem">
+    <Position X="6.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>InventoryEntry.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAAABEAAA=</HashCode>
+      <FileName>IRepositorySystem.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Item" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="Zefugi.Inventory.ItemRepository">
-    <Position X="6.75" Y="3.5" Width="1.5" />
+  </Interface>
+  <Interface Name="Zefugi.Inventory.IItemInfo">
+    <Position X="8.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ItemRepository.cs</FileName>
+      <HashCode>AAAAAAAAABAAgAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>IItemInfo.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="_items" />
-    </ShowAsCollectionAssociation>
-  </Class>
-  <Struct Name="Zefugi.Inventory.Item">
-    <Position X="9" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAgEAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Item.cs</FileName>
-    </TypeIdentifier>
-  </Struct>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
