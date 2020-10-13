@@ -16,11 +16,11 @@ namespace Zefugi.Inventory
             get => _items[id];
         }
 
-        public int Count => throw new NotImplementedException();
+        public int Count => _items.Count;
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _items.Clear();
         }
 
         public void Add(IItemInfo item)

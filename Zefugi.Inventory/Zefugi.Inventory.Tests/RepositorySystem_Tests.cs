@@ -68,8 +68,22 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(itemC, repo[uniqueID]);
         }
 
-        [Test] // TODO Clear_RemovesAllItems
-        public void Clear_RemovesAllItems() { }
+        [Test]
+        public void Clear_RemovesAllItems()
+        {
+            var repo = new RepositorySystem();
+
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 1;
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = 2;
+
+            repo.Add(itemA);
+            repo.Add(itemB);
+            repo.Clear();
+
+            Assert.AreEqual(0, repo.Count);
+        }
 
         [Test] // TODO Count_ReturnsNumberOfItems
         public void Count_ReturnsNumberOfItems() { }
