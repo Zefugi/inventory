@@ -52,6 +52,7 @@ namespace Zefugi.Inventory
                 {
                     var deltaAmount = entry.ItemInfo.StackSize - entry.ItemCount;
                     deltaAmount = deltaAmount < amountRemaning ? deltaAmount : amountRemaning;
+
                     amountRemaning -= deltaAmount;
                     entry.ItemCount += deltaAmount;
                 }
@@ -60,6 +61,7 @@ namespace Zefugi.Inventory
             while(amountRemaning > 0)
             {
                 var deltaAmount = amountRemaning <= item.StackSize ? amountRemaning : item.StackSize;
+
                 amountRemaning -= deltaAmount;
                 _items.Add(new InventoryEntry(item, deltaAmount));
             }
