@@ -284,5 +284,24 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(1, inv.GetAmount(itemA));
             Assert.AreEqual(0, inv.GetAmount(itemB));
         }
+
+        [Test]
+        public void AutoCompress_CompressesWhenChangedToTrue()
+        {
+            var inv = new InventorySystem();
+            inv.TotalSlots = 4;
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 1;
+            item.SlotsRequired = 1;
+            item.StackSize = 5;
+
+            inv.Store(item, 2);
+            inv.Store(item, 2);
+
+            inv.AutoCompress = true;
+
+            Assert.AreEqual(1, inv.UsedSlots);
+            Assert.AreEqual(4, inv.GetAmount(item));
+        }
     }
 }
