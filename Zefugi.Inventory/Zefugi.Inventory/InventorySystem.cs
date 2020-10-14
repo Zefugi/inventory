@@ -58,6 +58,7 @@ namespace Zefugi.Inventory
                         ItemInfo = item,
                         ItemCount = amountRemaning,
                     });
+                if (AutoCompress) Compress();
                 return true;
             }
             return false;
