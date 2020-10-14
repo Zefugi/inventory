@@ -115,9 +115,6 @@ namespace Zefugi.Inventory.Tests
             Assert.IsFalse(inv.Retrieve(item, 1));
         }
 
-        [Test] // TODO Retrieve_ReturnsFalse_IfItemIsUnavailable
-        public void Retrieve_ReturnsFalse_IfItemIsUnavailable() { }
-
         [Test] // TODO Retrieve_Compresses_IfAutoStackIsTrue
         public void Retrieve_Compresses_IfAutoStackIsTrue() { }
 
