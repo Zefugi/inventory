@@ -161,8 +161,7 @@ namespace Zefugi.Inventory
                 ClearItem(type.ID);
                 while(amount > 0)
                 {
-                    var deltaAmount = 0;
-                    deltaAmount = amount <= type.StackSize ? amount : type.StackSize;
+                    var deltaAmount = amount <= type.StackSize ? amount : type.StackSize;
 
                     _items.Add(new InventoryEntry()
                     {
