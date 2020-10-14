@@ -198,5 +198,14 @@ namespace Zefugi.Inventory
                 if (_items[i].ItemInfo.ID == id)
                     _items.RemoveAt(i--);
         }
+
+        public List<IItemInfo> GetAllItemTypes()
+        {
+            List<IItemInfo> typeList = new List<IItemInfo>();
+            foreach (var entry in _items)
+                if (!typeList.Contains(entry.ItemInfo))
+                    typeList.Add(entry.ItemInfo);
+            return typeList;
+        }
     }
 }

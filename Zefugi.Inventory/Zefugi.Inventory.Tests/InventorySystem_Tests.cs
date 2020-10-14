@@ -334,5 +334,30 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(1, inv.UsedSlots);
             Assert.AreEqual(4, inv.GetAmount(item));
         }
+
+        [Test]
+        public void GetAllItemTypes_ReturnsAllTypesOfItem()
+        {
+            var inv = new InventorySystem();
+            inv.TotalSlots = 4;
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 1;
+            itemA.SlotsRequired = 1;
+            itemA.StackSize = 5;
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = 2;
+            itemB.SlotsRequired = 2;
+            itemB.StackSize = 1;
+
+            inv.Store(itemA, 2);
+            inv.Store(itemA, 3);
+            inv.Store(itemB, 1);
+            inv.Store(itemB, 1);
+
+            var types = inv.GetAllItemTypes();
+            Assert.AreEqual(2, types.Count);
+            Assert.IsTrue(types.Contains(itemA));
+            Assert.IsTrue(types.Contains(itemB));
+        }
     }
 }
