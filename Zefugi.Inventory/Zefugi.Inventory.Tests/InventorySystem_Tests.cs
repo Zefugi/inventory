@@ -82,8 +82,20 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO FreeSlots_ReturnsUnusedSlots
         public void FreeSlots_ReturnsUnusedSlots() { }
 
-        [Test] // TODO Clear_ReturnsAllItemsAndMakesThemUnavailable
-        public void Clear_ReturnsAllItemsAndMakesThemUnavailable() { }
+        [Test]
+        public void Clear_MakesAllItemsUnavailable()
+        {
+            var inv = new InventorySystem();
+            var item = Substitute.For<IItemInfo>();
+            item.SlotsRequired = 1;
+            item.StackSize = 1;
+
+            inv.Store(item, 1);
+            inv.Clear();
+
+            Assert.AreEqual(1, inv.FreeSlots);
+            Assert.AreEqual(0, inv.UsedSlots);
+        }
 
         [Test] // TODO IsAvailable_ReturnsTrue_OnlyIfTheSpecifiedItemsAreAvailable
         public void IsAvailable_ReturnsTrue_OnlyIfTheSpecifiedItemsAreAvailable() { }
