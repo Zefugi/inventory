@@ -30,7 +30,7 @@ namespace Zefugi.Inventory.Tests
         public void TotalSlots_Throws_WhenShrink_IfSpaceUnavailable() { }
 
         [Test]
-        public void Store_MakesItemAvailable_IfSpaceAvailable()
+        public void Store_ReturnsTrueAndMakesItemAvailable_IfSpaceAvailable()
         {
             var inv = new InventorySystem();
             var itemA = Substitute.For<IItemInfo>();
@@ -39,12 +39,30 @@ namespace Zefugi.Inventory.Tests
             itemA.StackSize = 1;
 
             Assert.IsTrue(inv.Store(itemA, 1));
-
             Assert.IsTrue(inv.Retrieve(itemA, 1));
         }
 
-        [Test] // TODO Store_Throws_IfSpaceUnavailable
-        public void Store_Throws_IfSpaceUnavailable() { }
+        [Test]
+        public void Store_ReturnsFalseAndDoesNotStore_IfSpaceUnavailable()
+        {
+            var inv = new InventorySystem();
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 42;
+            itemA.SlotsRequired = 2;
+            itemA.StackSize = 1;
+
+            Assert.IsFalse(inv.Store(itemA, 1));
+            Assert.IsFalse(inv.Retrieve(itemA, 1));
+
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = 1337;
+            itemB.SlotsRequired = 1;
+            itemB.StackSize = 5;
+
+            Assert.IsTrue(inv.Store(itemB, 3));
+            Assert.IsFalse(inv.Store(itemB, 3));
+            Assert.IsFalse(inv.Retrieve(itemB, 5));
+        }
 
         [Test] // TODO Store_Compresses_IfAutoStackIsTrue
         public void Store_Compresses_IfAutoStackIsTrue() { }
