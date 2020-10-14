@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Zefugi.Inventory
 {
-    public class InventorySystem
+    public class InventorySystem<TItem>
+        where TItem : IItemInfo
     {
         private List<InventoryEntry> _items = new List<InventoryEntry>();
 
