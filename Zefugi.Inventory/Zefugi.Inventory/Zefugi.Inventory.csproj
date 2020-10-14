@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IItemInfo.cs" />
     <Compile Include="InventoryEntry.cs" />
+    <Compile Include="InventoryException.cs" />
     <Compile Include="InventorySystem.cs" />
     <Compile Include="RepositorySystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
