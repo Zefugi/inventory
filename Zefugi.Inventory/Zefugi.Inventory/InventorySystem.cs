@@ -139,9 +139,12 @@ namespace Zefugi.Inventory
 
             foreach(var entry in _items)
             {
-                if (entry.ItemInfo.ID == item.ID && additionalStackSize <= entry.ItemCount)
+                if (entry.ItemInfo.ID == item.ID && additionalStackSize <= item.StackSize - entry.ItemCount)
                     return true;
             }
+
+            if (freeSlotsRequired + 1 <= FreeSlots)
+                return true;
 
             return false;
         }
