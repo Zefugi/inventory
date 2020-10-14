@@ -10,5 +10,13 @@ namespace Zefugi.Inventory
     {
         public IItemInfo ItemInfo { get; set; }
         public int ItemCount { get; set; }
+
+        public InventoryEntry() { }
+
+        public InventoryEntry(IItemInfo itemInfo, int itemCount)
+        {
+            ItemInfo = itemInfo;
+            ItemCount = itemCount;
+        }
     }
 }
