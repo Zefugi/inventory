@@ -18,6 +18,8 @@ namespace Zefugi.Inventory
             get => _totalSlots;
             set
             {
+                if (value < UsedSlots)
+                    throw new InventoryException("Unable to shrink TotalSlots below the currently used slots.");
                 _totalSlots = value;
             }
         }

@@ -23,8 +23,35 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(4, inv.TotalSlots);
         }
 
-        [Test] // TODO TotalSlots_CanShrink_IfSpaceAvailable
-        public void TotalSlots_CanShrink_IfSpaceAvailable() { }
+        [Test]
+        [TestCase(5, false)]
+        [TestCase(4, false)]
+        [TestCase(3, false)]
+        [TestCase(2, false)]
+        [TestCase(1, true)]
+        public void TotalSlots_CanShrink_IfSpaceAvailable(int finalTotalSlots, bool throwException)
+        {
+            var initialSlots = 4;
+            var inv = new InventorySystem();
+            inv.TotalSlots = initialSlots;
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 1;
+            item.SlotsRequired = 2;
+            item.StackSize = 1;
+
+            inv.Store(item, 1);
+
+            if (throwException)
+            {
+                Assert.Throws<InventoryException>(() => { inv.TotalSlots = finalTotalSlots; });
+                Assert.AreEqual(initialSlots, inv.TotalSlots);
+            }
+            else
+            {
+                inv.TotalSlots = finalTotalSlots;
+                Assert.AreEqual(finalTotalSlots, inv.TotalSlots);
+            }
+        }
 
         [Test] // TODO TotalSlots_Throws_WhenShrink_IfSpaceUnavailable
         public void TotalSlots_Throws_WhenShrink_IfSpaceUnavailable() { }
