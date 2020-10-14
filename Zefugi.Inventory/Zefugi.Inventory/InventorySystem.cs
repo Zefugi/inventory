@@ -38,30 +38,35 @@ namespace Zefugi.Inventory
 
         public bool Store(IItemInfo item, int amount)
         {
+            if (!HasRoomFor(item, amount))
+                return false;
+
             int requiredSlots = item.SlotsRequired * (amount / item.StackSize);
             requiredSlots += amount % item.StackSize > 0 ? 1 : 0;
-            if(requiredSlots <= FreeSlots)
+            int amountRemaning = amount;
+            
+            foreach(var entry in _items)
             {
-                int amountRemaning = amount;
-                while (amountRemaning > item.StackSize)
+                if(entry.ItemInfo.ID == item.ID
+                    && entry.ItemCount < entry.ItemInfo.StackSize)
                 {
-                    _items.Add(new InventoryEntry
-                    {
-                        ItemInfo = item,
-                        ItemCount = item.StackSize,
-                    });
-                    amountRemaning -= item.StackSize;
+                    var deltaAmount = entry.ItemInfo.StackSize - entry.ItemCount;
+                    deltaAmount = deltaAmount < amountRemaning ? deltaAmount : amountRemaning;
+                    amountRemaning -= deltaAmount;
+                    entry.ItemCount += deltaAmount;
                 }
-                if (amountRemaning > 0)
-                    _items.Add(new InventoryEntry
-                    {
-                        ItemInfo = item,
-                        ItemCount = amountRemaning,
-                    });
-                if (AutoCompress) Compress();
-                return true;
             }
-            return false;
+
+            while(amountRemaning > 0)
+            {
+                var deltaAmount = amountRemaning <= item.StackSize ? amountRemaning : item.StackSize;
+                amountRemaning -= deltaAmount;
+                _items.Add(new InventoryEntry(item, deltaAmount));
+            }
+
+            if (AutoCompress) Compress();
+
+            return true;
         }
 
         public bool Retrieve(IItemInfo item, int amount)
