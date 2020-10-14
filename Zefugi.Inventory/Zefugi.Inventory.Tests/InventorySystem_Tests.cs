@@ -98,10 +98,16 @@ namespace Zefugi.Inventory.Tests
         public void FreeSlots_ReturnsUnusedSlots()
         {
             var inv = new InventorySystem();
+            var item = Substitute.For<IItemInfo>();
+            item.SlotsRequired = 2;
+            item.StackSize = 1;
 
             Assert.AreEqual(1, inv.FreeSlots);
-            inv.TotalSlots = 4;
-            Assert.AreEqual(4, inv.FreeSlots);
+            inv.TotalSlots = 5;
+            Assert.AreEqual(5, inv.FreeSlots);
+
+            inv.Store(item, 1);
+            Assert.AreEqual(3, inv.FreeSlots);
         }
 
         [Test]
