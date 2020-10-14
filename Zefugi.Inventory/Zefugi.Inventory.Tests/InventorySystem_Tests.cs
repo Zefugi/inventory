@@ -273,14 +273,16 @@ namespace Zefugi.Inventory.Tests
             inv.Clear();
             for (int i = 0; i < 3; i++)
                 inv.Store(itemA, 20);
+            inv.Retrieve(itemA, 20);
             int preAmount = inv.GetAmount(itemA);
             inv.Compress();
             Assert.AreEqual(preAmount, inv.GetAmount(itemA));
-            Assert.AreEqual(2, inv.UsedSlots);
+            Assert.AreEqual(1, inv.UsedSlots);
 
             inv.Clear();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
                 inv.Store(itemB, 1);
+            inv.Retrieve(itemB, 2);
             preAmount = inv.GetAmount(itemB);
             inv.Compress();
             Assert.AreEqual(preAmount, inv.GetAmount(itemB));
