@@ -10,6 +10,23 @@
       <Field Name="_items" />
     </ShowAsCollectionAssociation>
   </Class>
+  <Class Name="Zefugi.Inventory.InventorySystem">
+    <Position X="0.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InventorySystem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Zefugi.Inventory.InventoryEntry">
+    <Position X="3.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>InventoryEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="Zefugi.Inventory.IItemInfo">
     <Position X="3.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
