@@ -78,6 +78,7 @@ namespace Zefugi.Inventory
                     if (amountRemaning < entry.ItemCount)
                     {
                         entry.ItemCount -= amountRemaning;
+                        if (AutoCompress) Compress();
                         return true;
                     }
                     else
@@ -85,7 +86,10 @@ namespace Zefugi.Inventory
                         amountRemaning -= entry.ItemCount;
                         _items.RemoveAt(i--);
                         if (amountRemaning == 0)
+                        {
+                            if (AutoCompress) Compress();
                             return true;
+                        }
                     }
                 }
             }

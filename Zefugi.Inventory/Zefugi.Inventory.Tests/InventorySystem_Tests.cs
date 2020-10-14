@@ -115,8 +115,24 @@ namespace Zefugi.Inventory.Tests
             Assert.IsFalse(inv.Retrieve(item, 1));
         }
 
-        [Test] // TODO Retrieve_Compresses_IfAutoStackIsTrue
-        public void Retrieve_Compresses_IfAutoStackIsTrue() { }
+        [Test]
+        public void Retrieve_Compresses_IfAutoStackIsTrue()
+        {
+            var inv = new InventorySystem();
+            inv.TotalSlots = 4;
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 1;
+            item.SlotsRequired = 1;
+            item.StackSize = 5;
+
+            inv.Store(item, 2);
+            inv.Store(item, 2);
+            inv.AutoCompress = true;
+            inv.Retrieve(item, 1);
+
+            Assert.AreEqual(1, inv.UsedSlots);
+            Assert.AreEqual(3, inv.GetAmount(item));
+        }
 
         [Test]
         public void UsedSlots_ReturnsUsedSlots()
