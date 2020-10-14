@@ -243,6 +243,20 @@ namespace Zefugi.Inventory.Tests
         }
 
         [Test]
+        public void HasRoomFor_ReturnsTrue_IfAdditionalStackSizeFitsInEmptySlot()
+        {
+            var inv = new InventorySystem();
+            inv.TotalSlots = 2;
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 42;
+            item.SlotsRequired = 1;
+            item.StackSize = 4;
+
+            inv.Store(item, 4);
+            Assert.IsTrue(inv.HasRoomFor(item, 3));
+        }
+
+        [Test]
         public void Compress_StacksItemsToSaveSlots()
         {
             var inv = new InventorySystem();
