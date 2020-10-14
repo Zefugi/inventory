@@ -106,5 +106,30 @@ namespace Zefugi.Inventory
 
             return false;
         }
+
+        public bool HasRoomFor(IItemInfo item, int amount)
+        {
+            int freeSlotsRequired = item.SlotsRequired * (amount / item.StackSize);
+            int additionalStackSize = amount % item.StackSize;
+
+            if (freeSlotsRequired > FreeSlots)
+                return false;
+
+            if (additionalStackSize == 0)
+                return true;
+
+            foreach(var entry in _items)
+            {
+                if (entry.ItemInfo.ID == item.ID && additionalStackSize <= entry.ItemCount)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public void Clear()
+        {
+            _items.Clear();
+        }
     }
 }

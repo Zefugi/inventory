@@ -88,7 +88,31 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO IsAvailable_ReturnsTrue_OnlyIfTheSpecifiedItemsAreAvailable
         public void IsAvailable_ReturnsTrue_OnlyIfTheSpecifiedItemsAreAvailable() { }
 
-        [Test] // TODO AutoStack_StacksItemsToSaveSlots
+        [Test]
+        public void HasRoomFor_ReturnsTrue_OnlyIfAllItemsSpecifiedCanBeStored()
+        {
+            var inv = new InventorySystem();
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 42;
+            item.SlotsRequired = 1;
+            item.StackSize = 1;
+
+            Assert.IsTrue(inv.HasRoomFor(item, 1));
+            Assert.IsFalse(inv.HasRoomFor(item, 2));
+            inv.Store(item, 1);
+            Assert.IsFalse(inv.HasRoomFor(item, 1));
+            inv.Clear();
+
+            item.StackSize = 2;
+            Assert.IsTrue(inv.HasRoomFor(item, 2));
+            Assert.IsFalse(inv.HasRoomFor(item, 3));
+
+            item.SlotsRequired = 2;
+            item.StackSize = 1;
+            Assert.IsFalse(inv.HasRoomFor(item, 1));
+        }
+
+        [Test] // TODO Compress_StacksItemsToSaveSlots
         public void Compress_StacksItemsToSaveSlots() { }
     }
 }
