@@ -162,10 +162,8 @@ namespace Zefugi.Inventory
                 while(amount > 0)
                 {
                     var deltaAmount = 0;
-                    if (amount <= type.StackSize)
-                        deltaAmount = amount;
-                    else
-                        deltaAmount = type.StackSize;
+                    deltaAmount = amount <= type.StackSize ? amount : type.StackSize;
+
                     _items.Add(new InventoryEntry()
                     {
                         ItemInfo = type,
