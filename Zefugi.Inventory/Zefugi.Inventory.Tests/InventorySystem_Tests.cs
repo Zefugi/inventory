@@ -29,7 +29,7 @@ namespace Zefugi.Inventory.Tests
         [TestCase(3, false)]
         [TestCase(2, false)]
         [TestCase(1, true)]
-        public void TotalSlots_CanShrink_IfSpaceAvailable(int finalTotalSlots, bool throwException)
+        public void TotalSlots_CanShrink_IfSpaceAvailable_Throws_ifSpaceUnavailable(int finalTotalSlots, bool throwException)
         {
             var initialSlots = 4;
             var inv = new InventorySystem();
