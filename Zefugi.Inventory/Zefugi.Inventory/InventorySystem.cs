@@ -12,6 +12,18 @@ namespace Zefugi.Inventory
         private List<InventoryEntry> _items = new List<InventoryEntry>();
 
         private int _totalSlots = 1;
+        private bool _autoCompress = false;
+
+        public bool AutoCompress
+        {
+            get => _autoCompress;
+            set
+            {
+                if (value && !_autoCompress)
+                    Compress();
+                _autoCompress = value;
+            }
+        }
 
         public int TotalSlots
         {
