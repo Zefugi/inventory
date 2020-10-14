@@ -11,5 +11,14 @@ namespace Zefugi.Inventory
         private List<InventoryEntry> _items = new List<InventoryEntry>();
 
         private int _totalSlots = 1;
+
+        public int TotalSlots
+        {
+            get => _totalSlots;
+            set
+            {
+                _totalSlots = value;
+            }
+        }
     }
 }

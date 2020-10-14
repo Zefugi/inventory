@@ -10,8 +10,17 @@ namespace Zefugi.Inventory.Tests
     [TestFixture]
     public class InventorySystem_Tests
     {
-        [Test] // TODO TotalSlots_CanGrow
-        public void TotalSlots_CanGrow() { }
+        [Test]
+        public void TotalSlots_CanGrow()
+        {
+            var inv = new InventorySystem();
+
+            Assert.AreEqual(1, inv.TotalSlots);
+
+            inv.TotalSlots = 4;
+
+            Assert.AreEqual(4, inv.TotalSlots);
+        }
 
         [Test] // TODO TotalSlots_CanShrink_IfSpaceAvailable
         public void TotalSlots_CanShrink_IfSpaceAvailable() { }
