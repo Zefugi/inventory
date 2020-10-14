@@ -133,5 +133,53 @@ namespace Zefugi.Inventory
         {
             _items.Clear();
         }
+
+        public void Compress()
+        {
+            List<IItemInfo> typeList = new List<IItemInfo>();
+            foreach (var entry in _items)
+                if (!typeList.Contains(entry.ItemInfo))
+                    typeList.Add(entry.ItemInfo);
+
+            foreach(var type in typeList)
+            {
+                int amount = GetAmount(type.ID);
+                ClearItem(type.ID);
+                while(amount > 0)
+                {
+                    var deltaAmount = 0;
+                    if (amount <= type.StackSize)
+                        deltaAmount = amount;
+                    else
+                        deltaAmount = type.StackSize;
+                    _items.Add(new InventoryEntry()
+                    {
+                        ItemInfo = type,
+                        ItemCount = deltaAmount,
+                    });
+                    amount -= deltaAmount;
+                }
+            }
+        }
+
+        public int GetAmount(IItemInfo item) => GetAmount(item.ID);
+
+        public int GetAmount(int itemID)
+        {
+            var amount = 0;
+            foreach (var entry in _items)
+                if (entry.ItemInfo.ID == itemID)
+                    amount += entry.ItemCount;
+            return amount;
+        }
+
+        public void ClearItem(IItemInfo item) => ClearItem(item.ID);
+
+        public void ClearItem(int id)
+        {
+            for (int i = 0; i < _items.Count; i++)
+                if (_items[i].ItemInfo.ID == id)
+                    _items.RemoveAt(i--);
+        }
     }
 }

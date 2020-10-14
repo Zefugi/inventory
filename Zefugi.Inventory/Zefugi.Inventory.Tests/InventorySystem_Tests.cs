@@ -211,7 +211,41 @@ namespace Zefugi.Inventory.Tests
             Assert.IsFalse(inv.HasRoomFor(item, 1));
         }
 
-        [Test] // TODO Compress_StacksItemsToSaveSlots
-        public void Compress_StacksItemsToSaveSlots() { }
+        [Test]
+        public void Compress_StacksItemsToSaveSlots()
+        {
+            var inv = new InventorySystem();
+            inv.TotalSlots = 4;
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 42;
+            itemA.SlotsRequired = 1;
+            itemA.StackSize = 40;
+            var itemB = Substitute.For<IItemInfo>();
+            itemB.ID = 1337;
+            itemB.SlotsRequired = 2;
+            itemB.StackSize = 3;
+
+            inv.Clear();
+            for (int i = 0; i < 3; i++)
+                inv.Store(itemA, 20);
+            int preAmount = inv.GetAmount(itemA);
+            inv.Compress();
+            Assert.AreEqual(preAmount, inv.GetAmount(itemA));
+            Assert.AreEqual(2, inv.UsedSlots);
+
+            inv.Clear();
+            for (int i = 0; i < 4; i++)
+                inv.Store(itemB, 1);
+            preAmount = inv.GetAmount(itemB);
+            inv.Compress();
+            Assert.AreEqual(preAmount, inv.GetAmount(itemB));
+            Assert.AreEqual(2, inv.UsedSlots);
+        }
+
+        [Test] // TODO GetAmount_ReturnsAmountOfSpecifiedItem
+        public void GetAmount_ReturnsAmountOfSpecifiedItem() { }
+
+        [Test] // TODO ClearItem_MakesTheSpecifiedItemUnavailable
+        public void ClearItem_MakesTheSpecifiedItemUnavailable() { }
     }
 }
