@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +29,19 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO TotalSlots_Throws_WhenShrink_IfSpaceUnavailable
         public void TotalSlots_Throws_WhenShrink_IfSpaceUnavailable() { }
 
-        [Test] // TODO Store_MakesItemAvailable_IfSpaceAvailable
-        public void Add_MakesItemAvailable_IfSpaceAvailable() { }
+        [Test]
+        public void Store_MakesItemAvailable_IfSpaceAvailable()
+        {
+            var inv = new InventorySystem();
+            var itemA = Substitute.For<IItemInfo>();
+            itemA.ID = 42;
+            itemA.SlotsRequired = 1;
+            itemA.StackSize = 1;
+
+            Assert.IsTrue(inv.Store(itemA, 1));
+
+            Assert.IsTrue(inv.Retrieve(itemA, 1));
+        }
 
         [Test] // TODO Store_Throws_IfSpaceUnavailable
         public void Store_Throws_IfSpaceUnavailable() { }
@@ -37,7 +49,7 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO Store_Compresses_IfAutoStackIsTrue
         public void Store_Compresses_IfAutoStackIsTrue() { }
 
-        [Test] // TODO Retrieve_ReturnsItemAndMakesItemUnavailable_IfItemIsAvailable
+        [Test] // TODO Retrieve_ReturnsTrueAndMakesItemUnavailable_IfItemIsAvailable
         public void Retrieve_ReturnsItemAndMakesItemUnavailable_IfItemIsAvailable() { }
 
         [Test] // TODO Retrieve_Throws_ifItemIsUnavailable
