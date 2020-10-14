@@ -242,8 +242,26 @@ namespace Zefugi.Inventory.Tests
             Assert.AreEqual(2, inv.UsedSlots);
         }
 
-        [Test] // TODO GetAmount_ReturnsAmountOfSpecifiedItem
-        public void GetAmount_ReturnsAmountOfSpecifiedItem() { }
+        [Test]
+        public void GetAmount_ReturnsAmountOfSpecifiedItem()
+        {
+            var firstAmount = 2;
+            var secondAmount = 4;
+
+            var inv = new InventorySystem();
+            inv.TotalSlots = 4;
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 1;
+
+            item.SlotsRequired = 1;
+            item.StackSize = 1;
+            inv.Store(item, firstAmount);
+            Assert.AreEqual(firstAmount, inv.GetAmount(item));
+
+            item.StackSize = 5;
+            inv.Store(item, secondAmount);
+            Assert.AreEqual(firstAmount + secondAmount, inv.GetAmount(item));
+        }
 
         [Test] // TODO ClearItem_MakesTheSpecifiedItemUnavailable
         public void ClearItem_MakesTheSpecifiedItemUnavailable() { }
