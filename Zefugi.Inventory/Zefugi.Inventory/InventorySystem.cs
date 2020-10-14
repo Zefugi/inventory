@@ -21,6 +21,7 @@ namespace Zefugi.Inventory
             {
                 if (value && !_autoCompress)
                     Compress();
+
                 _autoCompress = value;
             }
         }
@@ -32,6 +33,7 @@ namespace Zefugi.Inventory
             {
                 if (value < UsedSlots)
                     throw new InventoryException("Unable to shrink TotalSlots below the currently used slots.");
+
                 _totalSlots = value;
             }
         }
