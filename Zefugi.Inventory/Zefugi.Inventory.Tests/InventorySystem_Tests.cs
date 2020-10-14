@@ -67,11 +67,32 @@ namespace Zefugi.Inventory.Tests
         [Test] // TODO Store_Compresses_IfAutoStackIsTrue
         public void Store_Compresses_IfAutoStackIsTrue() { }
 
-        [Test] // TODO Retrieve_ReturnsTrueAndMakesItemUnavailable_IfItemIsAvailable
-        public void Retrieve_ReturnsItemAndMakesItemUnavailable_IfItemIsAvailable() { }
+        [Test]
+        public void Retrieve_ReturnsItemAndMakesItemUnavailable_IfItemIsAvailable()
+        {
+            var inv = new InventorySystem();
+            inv.TotalSlots = 4;
+            var item = Substitute.For<IItemInfo>();
+            item.ID = 2;
+            item.SlotsRequired = 1;
+            item.StackSize = 5;
 
-        [Test] // TODO Retrieve_Throws_ifItemIsUnavailable
-        public void Retrieve_Throws_ifItemIsUnavailable() { }
+            inv.Store(item, 3);
+
+            Assert.IsTrue(inv.Retrieve(item, 2));
+            Assert.IsFalse(inv.Retrieve(item, 2));
+
+            inv.Clear();
+            item.StackSize = 1;
+
+            inv.Store(item, 2);
+
+            Assert.IsTrue(inv.Retrieve(item, 2));
+            Assert.IsFalse(inv.Retrieve(item, 1));
+        }
+
+        [Test] // TODO Retrieve_ReturnsFalse_IfItemIsUnavailable
+        public void Retrieve_ReturnsFalse_IfItemIsUnavailable() { }
 
         [Test] // TODO Retrieve_Compresses_IfAutoStackIsTrue
         public void Retrieve_Compresses_IfAutoStackIsTrue() { }
