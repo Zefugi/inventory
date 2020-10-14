@@ -53,9 +53,6 @@ namespace Zefugi.Inventory.Tests
             }
         }
 
-        [Test] // TODO TotalSlots_Throws_WhenShrink_IfSpaceUnavailable
-        public void TotalSlots_Throws_WhenShrink_IfSpaceUnavailable() { }
-
         [Test]
         public void Store_ReturnsTrueAndMakesItemAvailable_IfSpaceAvailable()
         {
