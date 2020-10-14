@@ -153,10 +153,7 @@ namespace Zefugi.Inventory
 
         public void Compress()
         {
-            List<IItemInfo> typeList = new List<IItemInfo>();
-            foreach (var entry in _items)
-                if (!typeList.Contains(entry.ItemInfo))
-                    typeList.Add(entry.ItemInfo);
+            List<IItemInfo> typeList = GetAllItemTypes();
 
             foreach(var type in typeList)
             {
